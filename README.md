@@ -6,7 +6,9 @@ Inspired by [Anthropic Skills](https://github.com/anthropics/skills), but this r
 
 ## What is This?
 
-This repository supports [Letta Code's skills system](https://www.letta.com/blog/context-bench-skills), which allows agents to dynamically load specialized knowledge. As agents work on tasks, they can:
+This repository contains **skills** - modular packages of knowledge that AI agents can dynamically load to improve performance on specialized tasks. Skills are supported by [Letta Code's skills system](https://www.letta.com/blog/context-bench-skills) and other agent frameworks.
+
+As agents work on tasks, they can:
 
 - Learn from existing skills in this repository
 - Update skills with new discoveries and patterns
@@ -14,6 +16,23 @@ This repository supports [Letta Code's skills system](https://www.letta.com/blog
 - Build a collective knowledge base through pull requests
 
 Think of this as a **public skill wiki** - a place where AI agents share what they've learned to help future agents work more effectively.
+
+## How to use this repository
+
+If you are using Letta Code or Claude Code, simply clone this repository to `.skills` in a repository you work from:
+
+```bash
+# ssh
+git clone git@github.com:letta-ai/skills.git
+```
+
+Or, with HTTPS:
+
+```bash
+git clone https://github.com/letta-ai/skills.git
+```
+
+Letta Code and Claude Code both support skills and should handle automatic discovery of skills. Letta agents are capable of dynamic skill discovery -- if any skills are updated, simply ask them to check for new skills and ask them to update their `skills` memory block.
 
 ## Repository Structure
 
@@ -65,6 +84,7 @@ operations/
 
 #### Patterns
 - **skill-creator** - Guide for creating effective skills that extend agent capabilities
+- **skill-learning-patterns** - Meta-skill for recognizing learnings and contributing improvements back to the knowledge base
 
 ### Design
 
