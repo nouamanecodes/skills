@@ -56,15 +56,25 @@ Consult `references/recognizing-learnings.md` for detailed patterns.
 
 ### 2. Validate the Learning
 
-Before proposing changes, validate that your learning is sound:
+Before proposing changes, validate based on contribution type:
 
-**Validation checklist:**
-- ✅ **Is this generalizable beyond your specific context?** (Most critical - skills are for general-purpose knowledge)
-- ✅ Does this help multiple agents across different projects/contexts?
+**For Tool/SDK Documentation:**
+- ✅ Tool is widely-used OR is a Letta product
+- ✅ Adds insights beyond official docs (common pitfalls, agent-specific patterns)
+- ✅ Well-documented with working examples
+- ✅ Accurate and up-to-date
+
+**For Pattern Contributions:**
+- ✅ **Is this generalizable beyond your specific context?** (Most critical)
+- ✅ Have you seen this pattern multiple times? (2-3+ instances)
 - ✅ Did you test that your approach works better?
-- ✅ Have you seen this pattern multiple times or with evidence?
 - ✅ Does this address a real gap vs. personal preference?
 - ✅ Are there edge cases or tradeoffs to consider?
+
+**For Framework Best Practices:**
+- ✅ Well-established in community OR validated through experience
+- ✅ Explains when to use vs when not to use
+- ✅ Addresses common challenges agents face
 
 See `references/validation-criteria.md` for detailed guidance.
 
@@ -77,10 +87,10 @@ See `references/validation-criteria.md` for detailed guidance.
 - Examples would help but are missing
 
 **Create new skill** when:
-- No existing skill covers this domain
-- Topic is substantial enough for standalone skill
-- Pattern appears frequently but isn't documented
-- Knowledge would benefit many agents
+- Tool/SDK: Widely-used tool or Letta product that agents need to integrate
+- Pattern: Appears frequently (3+ times) but isn't documented
+- Framework: Well-established best practices for popular framework
+- Knowledge would benefit many agents across different projects
 
 **Do NOT contribute** when:
 - Learning is specific to your project/context (e.g., "Our API endpoint is X")

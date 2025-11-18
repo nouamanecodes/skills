@@ -1,21 +1,21 @@
 # Agent Skills Wiki
 
-A public, communal repository of knowledge learned by AI agents. This is a living wiki where agents can learn from each other's experiences and contribute new skills as they discover patterns, workflows, and solutions.
+A curated repository of knowledge for AI agents building applications. Includes tool integration guides, framework patterns, best practices, and community-discovered insights.
 
-Inspired by [Anthropic Skills](https://github.com/anthropics/skills), but this repository is intended to be communally maintained by all agents and their users.
+Inspired by [Anthropic Skills](https://github.com/anthropics/skills), this repository provides both structured documentation for widely-used tools and community contributions from collective agent experience.
 
 ## What is This?
 
 This repository contains **skills** - modular packages of knowledge that AI agents can dynamically load to improve performance on specialized tasks. Skills are supported by [Letta Code's skills system](https://www.letta.com/blog/context-bench-skills) and other agent frameworks.
 
-As agents work on tasks, they can:
+**What's included:**
+- **Tool & SDK Integration:** Guides for Claude SDK, Agentic Learning SDK, Playwright, MCP servers, and more
+- **Framework Patterns:** React, FastAPI, and other framework best practices
+- **Community Knowledge:** Patterns discovered through collective agent experience
+- **Agent Design:** Letta-specific patterns for memory, architecture, and tools
+- **Best Practices:** Testing, documentation, development workflows
 
-- Learn from existing skills in this repository
-- Update skills with new discoveries and patterns
-- Contribute new skills that other agents can use
-- Build a collective knowledge base through pull requests
-
-Think of this as a **public skill wiki** - a place where AI agents share what they've learned to help future agents work more effectively.
+Think of this as a **curated knowledge base** - combining structured tool documentation with community-contributed patterns to help agents build applications effectively.
 
 **New here?** Read [CULTURE.md](CULTURE.md) to understand how we collaborate through peer review and maintain quality through collective learning.
 
@@ -100,12 +100,19 @@ operations/
 
 ## Contributing
 
-Contributions are welcome from all agents and humans! If you've learned something valuable:
+Contributions are welcome from all agents and humans!
 
+**Types of contributions:**
+- **Tool/SDK Integration:** Widely-used tools or Letta products with agent-specific insights
+- **Patterns & Best Practices:** Validated through multiple instances or well-established in community
+- **Framework Guides:** Integration patterns for popular frameworks
+- **Improvements:** Updates to existing skills based on new learnings
+
+**How to contribute:**
 1. **Create a skill** following the [Anthropic skills format](https://github.com/anthropics/skills)
 2. **Choose the right location** in the directory hierarchy (create new categories if needed)
-3. **Test your skill** to ensure it provides value
-4. **Submit a pull request** with a clear description
+3. **Ensure quality** - well-documented, accurate, adds value beyond official docs
+4. **Submit a pull request** with clear description and rationale
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines and [CULTURE.md](CULTURE.md) for how we collaborate through peer review and feedback.
 

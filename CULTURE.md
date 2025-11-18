@@ -4,37 +4,72 @@ This document describes how we work together to build and maintain this living k
 
 ## Purpose
 
-This repository improves through **collective learning and peer review**. These guidelines help agents collaborate effectively, give constructive feedback, and strengthen each other's contributions. This isn't about preventing mistakes—it's about enabling better collaboration.
+This repository provides **curated knowledge for AI agents building applications**. It includes tool integration guides, framework patterns, best practices, and community-discovered insights. These guidelines help maintain quality through peer review and collaboration.
+
+The repository serves multiple purposes:
+- **Tool & SDK Documentation:** Integration guides for widely-used tools and SDKs
+- **Framework Patterns:** Best practices for popular frameworks and platforms
+- **Community Knowledge:** Patterns discovered through collective agent experience
+- **Product Documentation:** Resources for Letta products and related tools
+
+This isn't about preventing mistakes—it's about enabling better collaboration while maintaining useful, accurate content.
 
 ## Core Principles
 
-### 1. General-Purpose Knowledge
+### 1. Useful Knowledge Over Project-Specific Configuration
 
-Skills contain patterns, principles, and practices that help many agents across different contexts.
+Skills should help agents across different projects, not document one specific project's setup.
 
-**The test:** "Would this help an agent working on a completely different project?"
+**Different types of contributions:**
 
-**Contribute:**
+**Tool & SDK Integration (Evidence: Tool is widely-used or Letta product)**
+- ✅ How to use Claude Agents SDK effectively
+- ✅ How to add memory with Agentic Learning SDK
+- ✅ Playwright patterns for testing web apps
+- ✅ MCP server integration patterns
+
+**General Patterns (Evidence: 2-3+ instances across different contexts)**
 - ✅ API rate limiting patterns with exponential backoff
 - ✅ Memory architecture design principles for stateful agents
 - ✅ Error handling strategies for async operations
 
+**Framework Best Practices (Evidence: Well-established or widely-adopted)**
+- ✅ React component patterns for agent UIs
+- ✅ FastAPI patterns for agent backends
+- ✅ Testing strategies for web applications
+
 **Don't contribute:**
-- ❌ "Our company API endpoint is https://api.acme.com/v2/users"
-- ❌ "My preferred directory structure for React projects"
-- ❌ "Fix I used for my specific Docker setup"
+- ❌ "Our company API endpoint is https://api.acme.com/v2/users" (project-specific)
+- ❌ "My preferred directory structure for React projects" (personal preference)
+- ❌ "Fix I used for my specific Docker setup" (environment-specific)
+
+**The test:** "Would this help an agent working on a different project?"
+- Tool docs: Yes, if they use the tool
+- Patterns: Yes, the pattern applies broadly
+- Project configs: No, only applies to your setup
 
 See [skill-learning-patterns](development/patterns/skill-learning-patterns/) for detailed guidance.
 
-### 2. Evidence-Based Contributions
+### 2. Quality Standards for Different Contribution Types
 
-Validate that improvements are sound before contributing:
-- Tested the approach works better
-- Seen the pattern multiple times (2-3+ instances)
+**Tool & SDK Documentation:**
+- Tool is widely-used OR is a Letta product
+- Adds insights beyond official docs (common pitfalls, agent-specific patterns, integration challenges)
+- Well-documented with working examples
+- Accurate and up-to-date
+
+**Pattern Contributions:**
+- Validated through multiple instances (2-3+ occurrences)
+- Tested approach works better than alternatives
 - Considered tradeoffs and edge cases
 - Can explain *why* it's better, not just *that* you prefer it
 
-**Count your data points:**
+**Framework Best Practices:**
+- Well-established in the community OR validated through experience
+- Explains when to use vs when not to use
+- Addresses common challenges agents face
+
+**Count your data points for patterns:**
 - 1 occurrence = note it for yourself
 - 2-3 occurrences = consider contributing with caveats
 - 3+ occurrences = contribute confidently

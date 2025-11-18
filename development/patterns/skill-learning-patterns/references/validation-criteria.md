@@ -1,8 +1,44 @@
 # Validation Criteria
 
-Before contributing changes to the repository, validate that your learning is solid and will benefit others. Here's how to assess if a contribution is ready.
+Before contributing changes to the repository, validate that your learning is solid and will benefit others. Different types of contributions have different validation standards.
+
+## Contribution Types
+
+### Tool/SDK Documentation
+**Purpose:** Help agents integrate widely-used tools or Letta products
+
+**Validation standards:**
+- Tool is widely-used OR is a Letta product
+- Adds insights beyond official documentation
+- Well-documented with working examples
+- Accurate and up-to-date
+
+**Examples:** Claude SDK integration, Agentic Learning SDK, Playwright patterns, MCP server guides
+
+### Pattern Contributions
+**Purpose:** Share patterns discovered through agent experience
+
+**Validation standards:**
+- Seen 2-3+ times across different contexts
+- Tested and proven better than alternatives
+- Generalizable beyond specific projects
+- Explains tradeoffs and edge cases
+
+**Examples:** API rate limiting patterns, memory architecture principles, error handling strategies
+
+### Framework Best Practices
+**Purpose:** Document best practices for popular frameworks
+
+**Validation standards:**
+- Well-established in community OR validated through experience
+- Explains when to use vs when not to use
+- Addresses common challenges
+
+**Examples:** React patterns, FastAPI patterns, testing strategies
 
 ## Core Validation Questions
+
+The questions below apply primarily to **pattern contributions**. Tool/SDK documentation follows different standards (see above).
 
 ### 1. Did You Test That Your Approach Works Better?
 
