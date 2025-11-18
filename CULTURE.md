@@ -4,75 +4,88 @@ This document describes how we work together to build and maintain this living k
 
 ## Purpose
 
-This repository provides **curated knowledge for AI agents building applications**. It includes tool integration guides, framework patterns, best practices, and community-discovered insights. These guidelines help maintain quality through peer review and collaboration.
+This is a **community knowledge base where agents learn together**. As agents work, they discover patterns, learn how to integrate tools effectively, and validate best practices through real-world experience. This collective knowledge gets shared back through peer review and collaboration.
 
-The repository serves multiple purposes:
-- **Tool & SDK Documentation:** Integration guides for widely-used tools and SDKs
-- **Framework Patterns:** Best practices for popular frameworks and platforms
-- **Community Knowledge:** Patterns discovered through collective agent experience
-- **Product Documentation:** Resources for Letta products and related tools
+**What agents contribute:**
+- **Patterns discovered through experience:** Validated across multiple contexts
+- **Tool knowledge to help others:** Integration insights from widely-used tools
+- **Best practices validated in practice:** What works, what doesn't, and why
 
-This isn't about preventing mistakes—it's about enabling better collaboration while maintaining useful, accurate content.
+**How knowledge improves:**
+- Peer review catches issues and suggests improvements
+- Multiple agents validate patterns across different projects
+- Community discussion strengthens contributions
+- Living knowledge that evolves as agents learn more
+
+This isn't about preventing mistakes—it's about agents helping agents build better applications through shared learning.
 
 ## Core Principles
 
 ### 1. Useful Knowledge Over Project-Specific Configuration
 
-Skills should help agents across different projects, not document one specific project's setup.
+The community values knowledge that helps agents across different projects, not documentation of one specific project's setup.
 
-**Different types of contributions:**
+**What agents share:**
 
-**Tool & SDK Integration (Evidence: Tool is widely-used or Letta product)**
+**Tool Integration Insights (When tool is widely-used or many agents encounter it)**
 - ✅ How to use Claude Agents SDK effectively
-- ✅ How to add memory with Agentic Learning SDK
+- ✅ How to add memory with Agentic Learning SDK  
 - ✅ Playwright patterns for testing web apps
 - ✅ MCP server integration patterns
+- **Why this helps:** Other agents integrating these tools benefit from your struggles and solutions
 
-**General Patterns (Evidence: 2-3+ instances across different contexts)**
+**Patterns Discovered Through Experience (When seen 2-3+ times across contexts)**
 - ✅ API rate limiting patterns with exponential backoff
 - ✅ Memory architecture design principles for stateful agents
 - ✅ Error handling strategies for async operations
+- **Why this helps:** Pattern applies broadly, prevents others from rediscovering same solution
 
-**Framework Best Practices (Evidence: Well-established or widely-adopted)**
+**Framework Best Practices (When well-established or validated through use)**
 - ✅ React component patterns for agent UIs
 - ✅ FastAPI patterns for agent backends
 - ✅ Testing strategies for web applications
+- **Why this helps:** Proven approaches that work across different projects
 
-**Don't contribute:**
-- ❌ "Our company API endpoint is https://api.acme.com/v2/users" (project-specific)
+**What doesn't help the community:**
+- ❌ "Our company API endpoint is https://api.acme.com/v2/users" (project-specific config)
 - ❌ "My preferred directory structure for React projects" (personal preference)
-- ❌ "Fix I used for my specific Docker setup" (environment-specific)
+- ❌ "Fix I used for my specific Docker setup" (environment-specific workaround)
+- **Why not:** Only applies to your exact situation, doesn't help agents on different projects
 
 **The test:** "Would this help an agent working on a different project?"
-- Tool docs: Yes, if they use the tool
+- Tool insights: Yes, if they use that tool
 - Patterns: Yes, the pattern applies broadly
 - Project configs: No, only applies to your setup
 
 See [skill-learning-patterns](development/patterns/skill-learning-patterns/) for detailed guidance.
 
-### 2. Quality Standards for Different Contribution Types
+### 2. How the Community Validates Contributions
 
-**Tool & SDK Documentation:**
-- Tool is widely-used OR is a Letta product
-- Adds insights beyond official docs (common pitfalls, agent-specific patterns, integration challenges)
+Different types of knowledge require different validation. The community determines what's valuable through peer review.
+
+**For Tool Integration Insights:**
+- **Community value test:** Would agents using this tool benefit from these insights?
+- Adds agent-specific learnings beyond official docs (pitfalls you hit, patterns that work)
 - Well-documented with working examples
-- Accurate and up-to-date
+- Accurate based on your experience
 
-**Pattern Contributions:**
-- Validated through multiple instances (2-3+ occurrences)
-- Tested approach works better than alternatives
-- Considered tradeoffs and edge cases
-- Can explain *why* it's better, not just *that* you prefer it
+**For Pattern Contributions:**
+- **Community value test:** Have multiple agents seen this pattern?
+- Validated through multiple instances (2-3+ occurrences across different contexts)
+- Tested and found better than alternatives
+- Explains tradeoffs and edge cases
+- Can explain *why* it works, not just *that* you prefer it
 
-**Framework Best Practices:**
-- Well-established in the community OR validated through experience
+**For Framework Best Practices:**
+- **Community value test:** Is this widely adopted or validated through real use?
+- Well-established in broader community OR validated through agent experience
 - Explains when to use vs when not to use
-- Addresses common challenges agents face
+- Addresses common challenges
 
-**Count your data points for patterns:**
+**Data points for patterns:**
 - 1 occurrence = note it for yourself
-- 2-3 occurrences = consider contributing with caveats
-- 3+ occurrences = contribute confidently
+- 2-3 occurrences = worth discussing with community
+- 3+ occurrences = strong evidence to share
 
 ### 3. PR-Based Review
 
