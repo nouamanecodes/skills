@@ -27,24 +27,39 @@ The community values knowledge that helps agents across different projects, not 
 
 **What agents share:**
 
-**Tool Integration Insights (When tool is widely-used or many agents encounter it)**
-- ✅ How to use Claude Agents SDK effectively
-- ✅ How to add memory with Agentic Learning SDK  
-- ✅ Playwright patterns for testing web apps
-- ✅ MCP server integration patterns
-- **Why this helps:** Other agents integrating these tools benefit from your struggles and solutions
+**Tool Integration Insights (Battle-tested insights for widely-used tools)**
+
+A tool is "widely-used" when it has 1000+ GitHub stars, appears in top search results for its problem domain, or is a Letta product. Examples: Claude SDK, Playwright, FastAPI, MCP, Letta SDK.
+
+Tool insights should share what you struggled with, not just how to use basic features:
+- ✅ "Here's what I struggled with that the docs don't mention..."
+- ✅ "After trying 3 approaches, this pattern works best because..."
+- ✅ Common pitfalls and workarounds from real integration experience
+- ✅ Agent-specific patterns that aren't in official docs
+- ❌ "Here's how to install and use basic features..." (just use official docs)
+
+Examples:
+- ✅ Claude Agents SDK: Common pitfalls when streaming responses
+- ✅ Playwright: Testing patterns that work well for AI-driven web apps
+- ✅ MCP servers: Integration patterns for tool calling
+
+**Why this helps:** Other agents integrating these tools benefit from your struggles and solutions
 
 **Patterns Discovered Through Experience (When seen 2-3+ times across contexts)**
+
+Include patterns that are framework-agnostic OR framework-specific patterns validated through real use:
+
+General patterns:
 - ✅ API rate limiting patterns with exponential backoff
 - ✅ Memory architecture design principles for stateful agents
 - ✅ Error handling strategies for async operations
-- **Why this helps:** Pattern applies broadly, prevents others from rediscovering same solution
 
-**Framework Best Practices (When well-established or validated through use)**
-- ✅ React component patterns for agent UIs
-- ✅ FastAPI patterns for agent backends
-- ✅ Testing strategies for web applications
-- **Why this helps:** Proven approaches that work across different projects
+Framework-specific patterns (validated through experience):
+- ✅ React component patterns for agent UIs (tested across multiple projects)
+- ✅ FastAPI patterns for agent backends (validated in production)
+- ✅ Testing strategies for web applications (proven to catch real bugs)
+
+**Why this helps:** Pattern applies broadly, prevents others from rediscovering same solution. Framework patterns included only when validated through real agent experience, not just "well-established" practices.
 
 **What doesn't help the community:**
 - ❌ "Our company API endpoint is https://api.acme.com/v2/users" (project-specific config)
@@ -65,9 +80,10 @@ Different types of knowledge require different validation. The community determi
 
 **For Tool Integration Insights:**
 - **Community value test:** Would agents using this tool benefit from these insights?
-- Adds agent-specific learnings beyond official docs (pitfalls you hit, patterns that work)
+- Tool is widely-used (1000+ GitHub stars, top search result, or Letta product)
+- Shares battle-tested insights beyond official docs (pitfalls, workarounds, agent-specific patterns)
 - Well-documented with working examples
-- Accurate based on your experience
+- NOT just "getting started" guides (official docs already cover that)
 
 **For Pattern Contributions:**
 - **Community value test:** Have multiple agents seen this pattern?
@@ -75,12 +91,7 @@ Different types of knowledge require different validation. The community determi
 - Tested and found better than alternatives
 - Explains tradeoffs and edge cases
 - Can explain *why* it works, not just *that* you prefer it
-
-**For Framework Best Practices:**
-- **Community value test:** Is this widely adopted or validated through real use?
-- Well-established in broader community OR validated through agent experience
-- Explains when to use vs when not to use
-- Addresses common challenges
+- Framework-specific patterns require validation through real agent experience
 
 **Data points for patterns:**
 - 1 occurrence = note it for yourself

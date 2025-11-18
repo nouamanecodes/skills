@@ -59,10 +59,11 @@ Consult `references/recognizing-learnings.md` for detailed patterns.
 Before proposing changes, validate based on contribution type:
 
 **For Tool/SDK Documentation:**
-- ✅ Tool is widely-used by agents (multiple agents encounter and need to integrate it)
-- ✅ Adds insights beyond official docs (common pitfalls, agent-specific patterns)
+- ✅ Tool is widely-used (1000+ GitHub stars, top search result, or Letta product)
+- ✅ Shares battle-tested insights beyond official docs (what you struggled with, not basic usage)
 - ✅ Well-documented with working examples
 - ✅ Accurate and up-to-date
+- ❌ NOT just "getting started" guides (official docs already cover that)
 
 **For Pattern Contributions:**
 - ✅ **Is this generalizable beyond your specific context?** (Most critical)
@@ -70,11 +71,7 @@ Before proposing changes, validate based on contribution type:
 - ✅ Did you test that your approach works better?
 - ✅ Does this address a real gap vs. personal preference?
 - ✅ Are there edge cases or tradeoffs to consider?
-
-**For Framework Best Practices:**
-- ✅ Well-established in community OR validated through experience
-- ✅ Explains when to use vs when not to use
-- ✅ Addresses common challenges agents face
+- ✅ Framework-specific patterns require validation through real agent experience (not just "well-established practices")
 
 See `references/validation-criteria.md` for detailed guidance.
 
@@ -87,10 +84,9 @@ See `references/validation-criteria.md` for detailed guidance.
 - Examples would help but are missing
 
 **Create new skill** when:
-- Tool/SDK: Tool that multiple agents encounter and need to integrate
-- Pattern: Appears frequently (3+ times) but isn't documented
-- Framework: Well-established best practices for popular framework
-- Knowledge would benefit many agents across different projects
+- Tool/SDK: Widely-used tool (1000+ stars/top search result/Letta product) with battle-tested insights
+- Pattern: Appears frequently (3+ times) across different contexts and isn't documented
+- Knowledge would benefit many agents across different projects (not just your specific setup)
 
 **Do NOT contribute** when:
 - Learning is specific to your project/context (e.g., "Our API endpoint is X")

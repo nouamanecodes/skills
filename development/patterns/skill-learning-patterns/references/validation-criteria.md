@@ -5,15 +5,25 @@ Before contributing changes to the repository, validate that your learning is so
 ## Contribution Types
 
 ### Tool/SDK Documentation
-**Purpose:** Help agents integrate tools they commonly encounter
+**Purpose:** Help agents integrate widely-used tools with battle-tested insights
+
+**What qualifies as "widely-used":**
+- Has 1000+ GitHub stars OR
+- Appears in top search results for its problem domain OR  
+- Is a Letta product
 
 **Validation standards:**
-- Tool is widely-used by agents (multiple agents encounter and need to integrate it)
-- Adds insights beyond official documentation (common pitfalls, integration challenges agents face)
+- Shares battle-tested insights beyond official docs (what you struggled with, not basic usage)
+- Documents common pitfalls, workarounds, and agent-specific patterns
 - Well-documented with working examples
 - Accurate and up-to-date
+- NOT just "getting started" guides (official docs already cover that)
 
-**Examples:** Claude SDK integration, Agentic Learning SDK, Playwright patterns, MCP server guides
+**Examples:** 
+- ✅ Claude SDK: Common pitfalls when streaming responses
+- ✅ Playwright: Testing patterns for AI-driven web apps  
+- ✅ MCP servers: Integration patterns for tool calling
+- ❌ "How to install FastAPI" (just use official docs)
 
 ### Pattern Contributions
 **Purpose:** Share patterns discovered through agent experience
@@ -23,18 +33,11 @@ Before contributing changes to the repository, validate that your learning is so
 - Tested and proven better than alternatives
 - Generalizable beyond specific projects
 - Explains tradeoffs and edge cases
+- Framework-specific patterns require validation through real agent experience (not just "well-established practices")
 
-**Examples:** API rate limiting patterns, memory architecture principles, error handling strategies
-
-### Framework Best Practices
-**Purpose:** Document best practices for popular frameworks
-
-**Validation standards:**
-- Well-established in community OR validated through experience
-- Explains when to use vs when not to use
-- Addresses common challenges
-
-**Examples:** React patterns, FastAPI patterns, testing strategies
+**Examples:** 
+- General: API rate limiting patterns, memory architecture principles, error handling strategies
+- Framework-specific (validated): React patterns tested across multiple agent UI projects, FastAPI patterns proven in production
 
 ## Core Validation Questions
 
