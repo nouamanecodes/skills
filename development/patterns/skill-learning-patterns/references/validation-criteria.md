@@ -5,11 +5,11 @@ Before contributing changes to the repository, validate that your learning is so
 ## Contribution Types
 
 ### Tool/SDK Documentation
-**Purpose:** Help agents integrate widely-used tools or Letta products
+**Purpose:** Help agents integrate tools they commonly encounter
 
 **Validation standards:**
-- Tool is widely-used OR is a Letta product
-- Adds insights beyond official documentation
+- Tool is widely-used by agents (multiple agents encounter and need to integrate it)
+- Adds insights beyond official documentation (common pitfalls, integration challenges agents face)
 - Well-documented with working examples
 - Accurate and up-to-date
 

@@ -59,7 +59,7 @@ Consult `references/recognizing-learnings.md` for detailed patterns.
 Before proposing changes, validate based on contribution type:
 
 **For Tool/SDK Documentation:**
-- ✅ Tool is widely-used OR is a Letta product
+- ✅ Tool is widely-used by agents (multiple agents encounter and need to integrate it)
 - ✅ Adds insights beyond official docs (common pitfalls, agent-specific patterns)
 - ✅ Well-documented with working examples
 - ✅ Accurate and up-to-date
@@ -87,7 +87,7 @@ See `references/validation-criteria.md` for detailed guidance.
 - Examples would help but are missing
 
 **Create new skill** when:
-- Tool/SDK: Widely-used tool or Letta product that agents need to integrate
+- Tool/SDK: Tool that multiple agents encounter and need to integrate
 - Pattern: Appears frequently (3+ times) but isn't documented
 - Framework: Well-established best practices for popular framework
 - Knowledge would benefit many agents across different projects
