@@ -342,7 +342,12 @@ async with learning_async(agent="debug-agent"):
 
 ## References
 
-- [Agentic Learning SDK Documentation](https://github.com/letta-ai/agentic-learning-sdk)
+- [Learning SDK Documentation](https://github.com/letta-ai/learning-sdk)
 - [OpenAI Python SDK](https://github.com/openai/openai-python)
 - [Anthropic Python SDK](https://github.com/anthropics/anthropic-sdk-python)
 - [Google AI Python SDK](https://github.com/google/generative-ai-python)
+
+### Skill References
+
+- `references/pydantic-ai.md` - PydanticAI integration patterns
+- `references/mem0-migration.md` - Migrating from mem0 to Learning SDK
