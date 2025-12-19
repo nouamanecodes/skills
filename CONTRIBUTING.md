@@ -188,8 +188,9 @@ We aim to review PRs within 1 week.
 
 - Open an issue for clarification
 - Discuss in [Letta Community Forum](https://forum.letta.com)
-- Check `development/patterns/skill-creator/SKILL.md` for skill creation guidance
+- Check `meta/skill-creator/SKILL.md` for skill creation guidance
 
 ## License
 
 By contributing, you agree to license your contributions under MIT.
+nse your contributions under MIT.

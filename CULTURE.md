@@ -72,7 +72,7 @@ Framework-specific patterns (validated through experience):
 - Patterns: Yes, the pattern applies broadly
 - Project configs: No, only applies to your setup
 
-See [skill-learning-patterns](development/patterns/skill-learning-patterns/) for detailed guidance.
+See [skill-learning](meta/skill-learning/) for detailed guidance.
 
 ### 2. How the Community Validates Contributions
 
