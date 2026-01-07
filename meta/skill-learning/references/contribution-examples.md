@@ -298,7 +298,7 @@ Agent working on multi-agent coordination. `letta-agent-designer` mentions multi
 ```markdown
 ## What
 
-Creates new skill `ai/agents/letta/letta-multi-agent-coordinator` covering 
+Creates new skill `letta/multi-agent-coordinator` covering 
 coordination patterns for multi-agent systems.
 
 ## Why
@@ -336,7 +336,7 @@ fits specific use cases. Documented when to use each pattern and why.
 ```
 
 **Changes:**
-- New skill: `ai/agents/letta/letta-multi-agent-coordinator/SKILL.md`
+- New skill: `letta/multi-agent-coordinator/SKILL.md`
 - Three pattern reference files, one per coordination pattern
 - Examples for each pattern
 - Decision criteria for pattern selection

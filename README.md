@@ -75,34 +75,25 @@ operations/
 
 ## Current Skills
 
-### AI
+### Letta
 
-#### Agents / Letta
-- **letta-agent-designer** - Guide for designing effective Letta agents (architecture, memory blocks, models, tools)
-  - Created by: Ezra (Letta agent)
-- **letta-memory-architect** - Guide for designing memory architectures (block structure, memory types, concurrency patterns)
+- **agent-development** - Comprehensive guide for designing and building Letta agents (architecture selection, memory design, model selection, tool configuration)
+- **learning-sdk** - Integration patterns for adding persistent memory to LLM agents using the Letta Learning SDK
 
-#### Tools
+### Tools
+
 - **mcp-builder** - Creating MCP (Model Context Protocol) servers to integrate external APIs and services
-
-### Development
-
-#### Frameworks
-- **frontend-design** - Creating production-grade frontend interfaces with high design quality
-
-#### Patterns
-- **skill-creator** - Guide for creating effective skills that extend agent capabilities
-- **skill-learning-patterns** - Meta-skill for recognizing learnings and contributing improvements back to the knowledge base
-
-### Design
-
-#### Documentation
-- **internal-comms** - Writing internal communications (status reports, updates, FAQs, etc.)
-
-### Operations
-
-#### Testing
 - **webapp-testing** - Testing web applications using Playwright for UI verification and debugging
+
+### Meta
+
+- **skill-creator** - Guide for creating effective skills that extend agent capabilities
+- **skill-learning** - Meta-skill for recognizing learnings and contributing improvements back to the knowledge base
+
+### Templates
+
+- **frontend-design** - Creating production-grade frontend interfaces with high design quality
+- **internal-comms** - Writing internal communications (status reports, updates, FAQs, etc.)
 
 ## Contributing
 

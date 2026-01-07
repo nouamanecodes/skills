@@ -330,7 +330,7 @@ git checkout -b refactor/memory-architecture-split
 git add ai/agents/letta/letta-memory-architect/SKILL.md
 git commit -m "Split memory types into separate reference file"
 
-git add ai/agents/letta/letta-memory-architect/references/memory-types.md
+git add letta/agent-development/references/memory-architecture.md
 git commit -m "Create memory-types reference with detailed comparison"
 
 # Push and create PR
