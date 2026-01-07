@@ -106,7 +106,15 @@ python scripts/needs_reply.py                          # Check inbox for emails 
 python scripts/needs_reply.py --max-results 30         # Check more emails
 python scripts/needs_reply.py --query "is:important"   # Filter to important emails
 python scripts/needs_reply.py --json                   # Output as JSON
+python scripts/needs_reply.py --include-automated      # Include newsletters/notifications
 ```
+
+**Important**: By default, `needs_reply.py` automatically filters out automated/notification emails:
+- Emails from `noreply@`, `notifications@`, `alerts@`, etc.
+- Emails with `List-Unsubscribe` headers (newsletters)
+- Common SaaS notification patterns (monitoring, dev tools, finance, calendar, etc.)
+
+Use `--include-automated` to see all emails including these.
 
 Status indicators:
 - 🔴 UNREAD - New email you haven't read

@@ -13,6 +13,7 @@ Usage:
 
 import argparse
 import json
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -22,12 +23,49 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from gmail_auth import get_gmail_service
 
+# Generic patterns for automated/notification senders
+# These catch common automated email patterns without listing specific services
+AUTOMATED_SENDER_PATTERNS = [
+    r"noreply@",
+    r"no-reply@",
+    r"donotreply@",
+    r"do-not-reply@",
+    r"notifications?@",
+    r"alerts?@",
+    r"marketing@",
+    r"news@",
+    r"newsletter@",
+    r"updates?@",
+    r"digest@",
+    r"automated@",
+    r"mailer@",
+    r"bounce@",
+    r"@.*notification",
+    r"@.*-alerts",
+    r"@mail\.",      # mail.company.com subdomains
+    r"@email\.",     # email.company.com subdomains  
+    r"@comm\.",      # comm.company.com subdomains
+    r"@plans\.",     # plans.company.com subdomains
+]
+
+# Compile patterns for efficiency
+AUTOMATED_PATTERNS_COMPILED = [re.compile(p, re.IGNORECASE) for p in AUTOMATED_SENDER_PATTERNS]
+
+
+def is_automated_sender(from_address: str) -> bool:
+    """Check if an email address appears to be from an automated sender."""
+    from_lower = from_address.lower()
+    for pattern in AUTOMATED_PATTERNS_COMPILED:
+        if pattern.search(from_lower):
+            return True
+    return False
+
 
 def get_needs_reply(
     credentials_path: str | None = None,
     max_results: int = 50,
     query: str = "",
-    user_email: str = "me",
+    include_automated: bool = False,
 ) -> list[dict]:
     """Find emails that need a reply.
     
@@ -35,7 +73,7 @@ def get_needs_reply(
         credentials_path: Path to credentials.json
         max_results: Maximum number of inbox emails to check
         query: Additional Gmail search query to filter
-        user_email: Your email address (used to identify your messages)
+        include_automated: If True, include automated/notification emails
     
     Returns:
         List of emails needing reply with metadata
@@ -46,13 +84,15 @@ def get_needs_reply(
     profile = service.users().getProfile(userId="me").execute()
     my_email = profile["emailAddress"].lower()
     
-    # Base query: in inbox, not from me, not automated
-    base_query = "in:inbox -from:me -from:noreply -from:no-reply -from:notifications -from:alerts -from:marketing"
-    full_query = f"{base_query} {query}".strip()
+    # Use labelIds for more reliable inbox filtering instead of "in:inbox" query
+    # The "in:inbox" query can sometimes return 0 results due to Gmail API quirks
+    # Also filter out emails from self
+    search_query = f"-from:me {query}".strip()
     
     results = service.users().messages().list(
-        userId="me", 
-        q=full_query, 
+        userId="me",
+        labelIds=["INBOX"],  # More reliable than "in:inbox" in query
+        q=search_query if search_query else None,
         maxResults=max_results
     ).execute()
     
@@ -64,12 +104,22 @@ def get_needs_reply(
             userId="me", 
             id=msg["id"], 
             format="metadata",
-            metadataHeaders=["From", "Subject", "Date"]
+            metadataHeaders=["From", "Subject", "Date", "List-Unsubscribe"]
         ).execute()
         
         headers = {h["name"]: h["value"] for h in msg_data["payload"]["headers"]}
+        from_address = headers.get("From", "")
         labels = msg_data.get("labelIds", [])
         thread_id = msg_data.get("threadId")
+        
+        # Skip automated senders unless explicitly requested
+        if not include_automated:
+            # Check if sender matches automated patterns
+            if is_automated_sender(from_address):
+                continue
+            # Emails with List-Unsubscribe header are usually newsletters
+            if "List-Unsubscribe" in headers:
+                continue
         
         # Get full thread to check for replies
         thread = service.users().threads().get(
@@ -164,6 +214,7 @@ Examples:
   %(prog)s --max-results 30
   %(prog)s --query "is:important"
   %(prog)s --query "from:@company.com"
+  %(prog)s --include-automated  # Include newsletters/notifications
         """,
     )
     parser.add_argument(
@@ -186,6 +237,11 @@ Examples:
         action="store_true",
         help="Output as JSON",
     )
+    parser.add_argument(
+        "--include-automated",
+        action="store_true",
+        help="Include automated/notification emails (normally filtered out)",
+    )
     
     args = parser.parse_args()
     
@@ -193,6 +249,7 @@ Examples:
         credentials_path=args.credentials,
         max_results=args.max_results,
         query=args.query,
+        include_automated=args.include_automated,
     )
     
     if args.json:
