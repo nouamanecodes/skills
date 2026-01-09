@@ -106,7 +106,7 @@ gh pr list
 gh pr checkout 123
 
 # View PR comments
-gh api repos/OWNER/REPO/pulls/123/comments
+gh api repos/{owner}/{repo}/issues/123/comments
 
 # Re-run failed jobs
 gh run rerun <run-id> --failed
