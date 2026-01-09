@@ -20,7 +20,7 @@ for arg in "$@"; do
 done
 
 if [ -n "$PR" ]; then
-    gh pr checks "$PR" $WATCH
+    gh pr checks "$PR" "$WATCH"
 else
-    gh pr checks $WATCH
+    gh pr checks "$WATCH"
 fi
