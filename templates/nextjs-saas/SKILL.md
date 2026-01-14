@@ -1,7 +1,7 @@
 ---
 name: nextjs-saas
-description: Use this skill when building multi-tenant SaaS applications with Next.js 16+ App Router and React 19 & Supabase. Covers project structure, the proxy pattern for auth, component patterns, state management with Context, Shadcn/ui integration, Tailwind v4 styling, Supabase auth, and multi-tenancy patterns.
-license: MIT
+description: Use when building multi-tenant SaaS with Next.js App Router and Supabase. Covers project structure, proxy pattern for auth, component patterns, state management, and Row-Level Security.
+license: Complete terms in LICENSE.txt
 ---
 
 # Next.js SaaS Application Patterns
