@@ -2,6 +2,12 @@
 """List all calendars accessible to the user."""
 
 import argparse
+import sys
+from pathlib import Path
+
+# Add script directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent))
+
 from calendar_auth import get_calendar_service
 
 

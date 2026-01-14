@@ -15,12 +15,12 @@ This skill provides Google Calendar access using the same OAuth credentials as G
 
 ## Available Scripts
 
-All scripts are in `.skills/google-calendar/scripts/` and require `--credentials ./credentials.json`.
+All scripts are in `tools/google-calendar/scripts/` and require `--credentials ./credentials.json`.
 
 ### List Calendars
 
 ```bash
-uv run python .skills/google-calendar/scripts/list_calendars.py --credentials ./credentials.json
+uv run python tools/google-calendar/scripts/list_calendars.py --credentials ./credentials.json
 ```
 
 ### Search Events
@@ -29,13 +29,13 @@ Search for events by text query or time range:
 
 ```bash
 # Search by text
-uv run python .skills/google-calendar/scripts/search_events.py "meeting" --credentials ./credentials.json
+uv run python tools/google-calendar/scripts/search_events.py "meeting" --credentials ./credentials.json
 
 # Search by date range (use YYYY-MM-DD format)
-uv run python .skills/google-calendar/scripts/search_events.py --start "YYYY-MM-DD" --end "YYYY-MM-DD" --credentials ./credentials.json
+uv run python tools/google-calendar/scripts/search_events.py --start "YYYY-MM-DD" --end "YYYY-MM-DD" --credentials ./credentials.json
 
 # Combine text and date
-uv run python .skills/google-calendar/scripts/search_events.py "standup" --start "YYYY-MM-DD" --credentials ./credentials.json
+uv run python tools/google-calendar/scripts/search_events.py "standup" --start "YYYY-MM-DD" --credentials ./credentials.json
 ```
 
 ### Check Availability (Free/Busy)
@@ -43,7 +43,7 @@ uv run python .skills/google-calendar/scripts/search_events.py "standup" --start
 Find busy periods in a time range:
 
 ```bash
-uv run python .skills/google-calendar/scripts/find_busy.py --start "YYYY-MM-DDTHH:MM:00" --end "YYYY-MM-DDTHH:MM:00" --credentials ./credentials.json
+uv run python tools/google-calendar/scripts/find_busy.py --start "YYYY-MM-DDTHH:MM:00" --end "YYYY-MM-DDTHH:MM:00" --credentials ./credentials.json
 ```
 
 **Note:** This script may have issues with datetime formatting. Use `search_events.py` as a more reliable way to check what's on the calendar.
@@ -53,14 +53,14 @@ uv run python .skills/google-calendar/scripts/find_busy.py --start "YYYY-MM-DDTH
 Create a new calendar event:
 
 ```bash
-uv run python .skills/google-calendar/scripts/create_event.py \
+uv run python tools/google-calendar/scripts/create_event.py \
   --summary "Team Standup" \
   --start "YYYY-MM-DDTHH:MM:00" \
   --end "YYYY-MM-DDTHH:MM:00" \
   --credentials ./credentials.json
 
 # With optional fields
-uv run python .skills/google-calendar/scripts/create_event.py \
+uv run python tools/google-calendar/scripts/create_event.py \
   --summary "Product Demo" \
   --start "YYYY-MM-DDTHH:MM:00" \
   --end "YYYY-MM-DDTHH:MM:00" \
@@ -86,7 +86,7 @@ uv run python .skills/google-calendar/scripts/create_event.py \
 ### Check availability for a day
 Use `search_events.py` with start and end dates to see all events:
 ```bash
-uv run python .skills/google-calendar/scripts/search_events.py --start "YYYY-MM-DD" --end "YYYY-MM-DD" --credentials ./credentials.json
+uv run python tools/google-calendar/scripts/search_events.py --start "YYYY-MM-DD" --end "YYYY-MM-DD" --credentials ./credentials.json
 ```
 
 ### Schedule a meeting
@@ -95,6 +95,6 @@ uv run python .skills/google-calendar/scripts/search_events.py --start "YYYY-MM-
 
 ### Review upcoming week
 ```bash
-uv run python .skills/google-calendar/scripts/search_events.py --start "TODAY" --end "NEXT_WEEK" --credentials ./credentials.json
+uv run python tools/google-calendar/scripts/search_events.py --start "TODAY" --end "NEXT_WEEK" --credentials ./credentials.json
 ```
 (Replace TODAY/NEXT_WEEK with actual dates)

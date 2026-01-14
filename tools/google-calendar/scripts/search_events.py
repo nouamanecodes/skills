@@ -2,7 +2,13 @@
 """Search calendar events by text query and/or date range."""
 
 import argparse
+import sys
 from datetime import datetime, timedelta
+from pathlib import Path
+
+# Add script directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent))
+
 from calendar_auth import get_calendar_service
 
 

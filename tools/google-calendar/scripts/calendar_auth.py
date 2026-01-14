@@ -79,9 +79,10 @@ def authenticate(
             flow = InstalledAppFlow.from_client_secrets_file(str(creds_path), scopes)
             creds = flow.run_local_server(port=0)
         
-        # Save token for future use
+        # Save token for future use with secure permissions
         with open(token_path, "w") as f:
             f.write(creds.to_json())
+        os.chmod(token_path, 0o600)  # Restrict to owner-only access
         print(f"Token saved to {token_path}")
     
     return creds
