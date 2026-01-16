@@ -1,5 +1,5 @@
 ---
-name: Letta Model Configuration
+name: model-configuration
 description: SDK/API patterns for configuring LLM models on Letta agents. Use when setting model handles, adjusting temperature/tokens, configuring provider-specific settings (reasoning, extended thinking), or setting up custom endpoints.
 license: MIT
 ---
