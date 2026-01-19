@@ -48,45 +48,52 @@ See [custom-tools.md](./custom-tools.md) for tool creation:
 - BaseTool class for complex schemas
 - Sandboxed execution requirements
 
-### 4. Client Injection & Secrets (Critical)
-See [client-injection.md](./client-injection.md) for advanced tool patterns:
+### 4. Client-Side Tools
+See [client-side-tools.md](./client-side-tools.md) for local tool execution:
+- Execute tools on your machine while agent runs on Letta API
+- How [Letta Code](https://github.com/letta-ai/letta-code) runs Bash/Read/Write locally
+- Approval-based flow with `type: "tool"` responses
+- Access local files, databases, and private APIs
+
+### 5. Client Injection & Secrets
+See [client-injection.md](./client-injection.md) for server-side tool patterns:
 - Pre-injected `client` variable on Letta Cloud
 - Building custom memory tools that modify agent state
 - Agent secrets via `os.getenv()`
 - `LETTA_AGENT_ID` for self-referential tools
 
-### 5. Multi-User Patterns
+### 6. Multi-User Patterns
 See [multi-user.md](./multi-user.md) for scaling:
 - One agent per user (personalization)
 - Shared agent with Conversations API
 - Identity system for user context
 
-### 6. Streaming
+### 7. Streaming
 See [streaming.md](./streaming.md) for real-time responses:
 - Basic SSE streaming
 - Long-running operations with `include_pings`
 - Background execution and resumable streams
 
-### 7. Conversations
+### 8. Conversations
 Conversations enable parallel sessions with shared memory:
 - Thread-safe concurrent messaging (agents.messages.create is NOT thread-safe)
 - Shared memory blocks across all conversations
 - Separate context windows per conversation
 - Use for: same user with multiple parallel tasks, multi-threaded applications
 
-### 8. Sleeptime Agents
+### 9. Sleeptime Agents
 See [sleeptime.md](./sleeptime.md) for background memory processing:
 - Enable with `enable_sleeptime=True`
 - Background agent refines memory between conversations
 - Good for agents that learn over time
 
-### 9. Agent Files & Folders
+### 10. Agent Files & Folders
 See [agent-files.md](./agent-files.md) for portability and file access:
 - Export/import agents with `.af` files
 - Attach folders to give agents document access
 - Migration checklist for moving agents
 
-### 10. Tool Rules
+### 11. Tool Rules
 See [tool-rules.md](./tool-rules.md) for constraining tool execution:
 - `InitToolRule` - Force a tool to run first
 - `ChildToolRule` - Control which tools can follow
@@ -142,6 +149,7 @@ See the `examples/` directory for runnable code:
 - `10_conversations.py` - Parallel sessions with conversations
 - `11_client_injection.py` - Custom memory tools with injected client
 - `12_tool_rules.py` - Constraining tool execution order
+- `13_client_side_tools.py` - Execute tools locally (like Letta Code)
 
 **TypeScript:**
 - `01_basic_client.ts` - Client initialization
@@ -156,6 +164,7 @@ See the `examples/` directory for runnable code:
 - `10_shared_blocks.ts` - Multi-agent shared memory
 - `11_client_injection.ts` - Custom memory tools
 - `12_tool_rules.ts` - Tool execution order
+- `13_client_side_tools.ts` - Execute tools locally (like Letta Code)
 
 ## Troubleshooting
 
