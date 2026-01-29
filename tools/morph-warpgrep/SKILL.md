@@ -40,6 +40,22 @@ sudo apt install ripgrep
 rg --version
 ```
 
+## Quick Test
+
+After setup, test WarpGrep on any local repository:
+
+```bash
+# One-liner test (replace /path/to/your/repo with a real codebase)
+bun -e 'import{MorphClient}from"@morphllm/morphsdk";const m=new MorphClient({apiKey:process.env.MORPH_API_KEY});const r=await m.warpGrep.execute({query:"Find the main entry point",repoRoot:"/path/to/your/repo"});console.log("Success:",r.success,"Files:",r.contexts?.map(c=>c.file))'
+```
+
+Expected output:
+```
+Success: true Files: [ "src/index.ts", ... ]
+```
+
+---
+
 ## When to Use
 
 ### Use WarpGrep When:
