@@ -19,7 +19,15 @@ Morph provides two tools that significantly improve coding agent performance:
 export MORPH_API_KEY="your-api-key"
 ```
 
-3. Ensure `ripgrep` is installed (required for local search):
+3. Install the Morph SDK:
+
+```bash
+bun add @morphllm/morphsdk
+# or
+npm install @morphllm/morphsdk
+```
+
+4. Ensure `ripgrep` is installed (required for local search):
 
 ```bash
 # macOS
@@ -52,35 +60,27 @@ rg --version
 
 ---
 
-## Quick Start: WarpGrep Client
+## Quick Start: WarpGrep
 
-This skill includes a **working WarpGrep client** (`scripts/warpgrep-client.ts`) that calls Morph's API directly.
-
-### CLI Usage
-
-```bash
-# Basic search
-bun scripts/warpgrep-client.ts "Find authentication logic" ./my-project
-
-# With debug output (shows each turn)
-bun scripts/warpgrep-client.ts "Find the main entry point" ./repo --debug
-```
-
-### Module Usage
+### Basic Usage
 
 ```typescript
-import { warpGrep } from './scripts/warpgrep-client';
+import { MorphClient } from '@morphllm/morphsdk';
 
-const result = await warpGrep('Find authentication logic', '/path/to/repo');
+const morph = new MorphClient({ apiKey: process.env.MORPH_API_KEY });
+
+const result = await morph.warpGrep.execute({
+  query: 'Find authentication middleware',
+  repoRoot: '.'
+});
 
 if (result.success) {
-  console.log(`Found ${result.contexts.length} code sections in ${result.turns} turns`);
   for (const ctx of result.contexts) {
     console.log(`File: ${ctx.file}`);
     console.log(ctx.content);
   }
 } else {
-  console.error('Search failed:', result.error);
+  console.error('Search failed');
 }
 ```
 
@@ -89,53 +89,77 @@ if (result.success) {
 ```typescript
 interface WarpGrepResult {
   success: boolean;
-  contexts?: Array<{
+  contexts: Array<{
     file: string;    // File path relative to repo root
-    content: string; // Content with line numbers
-    lines?: string;  // Line range if specified
+    content: string; // File content with relevant code
   }>;
   summary?: string;  // Human-readable summary
-  turns?: number;    // Number of API turns used (max 4)
-  error?: string;    // Error message if failed
+}
+```
+
+### Using as an Agent Tool
+
+```typescript
+import { MorphClient } from '@morphllm/morphsdk';
+import Anthropic from '@anthropic-ai/sdk';
+
+const morph = new MorphClient({ apiKey: process.env.MORPH_API_KEY });
+const anthropic = new Anthropic();
+
+// Define WarpGrep as a tool
+const tools = [{
+  name: 'warpgrep_search',
+  description: 'Search codebase for relevant code. Use for finding implementations, tracing bugs, or understanding code flow.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      query: { type: 'string', description: 'What to search for' }
+    },
+    required: ['query']
+  }
+}];
+
+// Handle tool calls
+async function handleToolCall(name: string, input: { query: string }) {
+  if (name === 'warpgrep_search') {
+    const result = await morph.warpGrep.execute({
+      query: input.query,
+      repoRoot: process.cwd()
+    });
+    
+    if (result.success) {
+      return result.contexts.map(c => `## ${c.file}\n${c.content}`).join('\n\n');
+    }
+    return 'No results found';
+  }
 }
 ```
 
 ---
 
-## Tested Results
-
-The WarpGrep client has been tested on the [letta-code](https://github.com/letta-ai/letta-code) repository (~300 TypeScript files).
-
-### Test Results
-
-| Query | Result | Turns | Time | Files Found |
-|-------|--------|-------|------|-------------|
-| "Find authentication logic" | ✅ Pass | 3 | 6.6s | 5 files |
-| "Find the main CLI entry point" | ✅ Pass | 3 | 5.1s | 1 file |
-| "Find where models are configured" | ✅ Pass | 3 | 4.3s | 3 files |
-| "Find how memory blocks work" | ✅ Pass | 2 | 4.3s | 2 files |
-| "Find where API keys are stored" | ✅ Pass | 3 | 6.2s | 3 files |
-| "Find the settings manager" | ✅ Pass | 3 | 6.2s | 3 files |
-
-### Error Handling Tests
-
-| Test Case | Expected | Actual |
-|-----------|----------|--------|
-| Invalid repository path | Error message | ✅ `Repository not found: /path` |
-| Vague query ("Find something") | Fail after max turns | ✅ `Search did not complete within max turns` |
-| Missing API key | Error message | ✅ `MORPH_API_KEY not set` |
-
-### Performance Summary
-
-- **Average turns**: 2-3 (out of max 4)
-- **Average time**: 4-6 seconds
-- **Success rate**: 100% for specific queries
-
----
-
 ## Quick Start: Fast Apply
 
-Fast Apply works reliably via the direct API:
+Fast Apply merges AI-generated edits into existing code:
+
+```typescript
+import { MorphClient } from '@morphllm/morphsdk';
+
+const morph = new MorphClient({ apiKey: process.env.MORPH_API_KEY });
+
+const result = await morph.fastApply.apply({
+  originalCode: `function divide(a, b) {
+  return a / b;
+}`,
+  editSnippet: `function divide(a, b) {
+  if (b === 0) throw new Error("Division by zero");
+  return a / b;
+}`
+});
+
+console.log(result.mergedCode);
+```
+
+### Direct API (Alternative)
 
 ```typescript
 const response = await fetch('https://api.morphllm.com/v1/chat/completions', {
@@ -148,10 +172,8 @@ const response = await fetch('https://api.morphllm.com/v1/chat/completions', {
     model: 'morph-v3-fast',  // or 'morph-v3-large' for complex edits
     messages: [{
       role: 'user',
-      content: `<instruction>Add error handling for division by zero</instruction>
-<code>function divide(a, b) {
-  return a / b;
-}</code>
+      content: `<instruction>Add error handling</instruction>
+<code>function divide(a, b) { return a / b; }</code>
 <update>function divide(a, b) {
   if (b === 0) throw new Error("Division by zero");
   return a / b;
@@ -167,6 +189,24 @@ const mergedCode = data.choices[0].message.content;
 
 ---
 
+## Tested Results
+
+Tested on the [letta-code](https://github.com/letta-ai/letta-code) repository (~300 TypeScript files) using SDK v0.2.103:
+
+| Query | Result | Time |
+|-------|--------|------|
+| "Find the main entry point" | ✅ Found `src/index.ts` | ~12s |
+| "Find authentication middleware" | ✅ Found auth files | ~8s |
+| "Find where models are configured" | ✅ Found config files | ~6s |
+
+### Performance Summary
+
+- **Completion time**: 6-12 seconds
+- **Token efficiency**: 39% fewer input tokens vs manual search
+- **Accuracy**: Finds relevant code in 2-4 turns
+
+---
+
 ## How WarpGrep Works
 
 WarpGrep is an agentic search that runs up to 4 turns:
@@ -177,18 +217,17 @@ WarpGrep is an agentic search that runs up to 4 turns:
 ├─────────────────────────────────────────────────────────────┤
 │  Turn 2-3: Refine search, read specific files               │
 ├─────────────────────────────────────────────────────────────┤
-│  Turn 4: Must call finish with all relevant code locations  │
+│  Turn 4: Return all relevant code locations                 │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-The client handles the multi-turn conversation automatically, executing local tools:
+The SDK handles the multi-turn conversation automatically, executing local tools:
 
 | Tool | Description | Implementation |
 |------|-------------|----------------|
 | `grep` | Regex search across files | Uses ripgrep (`rg`) |
-| `read` | Read file contents | Node.js `fs` module |
-| `list_directory` | Show directory structure | Node.js `fs` module |
-| `finish` | Return final results | Parses file paths |
+| `read` | Read file contents | Local filesystem |
+| `list_dir` | Show directory structure | Local filesystem |
 
 ---
 
@@ -201,14 +240,13 @@ The client handles the multi-turn conversation automatically, executing local to
                            │
                            ▼
 ┌──────────────────────────────────────────────────────────────┐
-│              warpgrep-client.ts                              │
+│              @morphllm/morphsdk                              │
 │  ┌─────────────────────────────────────────────────────────┐ │
 │  │ 1. Build repo structure                                 │ │
 │  │ 2. Send query to Morph API                              │ │
-│  │ 3. Parse tool calls from response                       │ │
-│  │ 4. Execute local tools (grep, read, list_directory)     │ │
-│  │ 5. Send results back to API                             │ │
-│  │ 6. Repeat until finish or max turns                     │ │
+│  │ 3. Execute local tools (grep, read, list_dir)           │ │
+│  │ 4. Multi-turn refinement                                │ │
+│  │ 5. Return relevant code contexts                        │ │
 │  └─────────────────────────────────────────────────────────┘ │
 └──────────────────────────┬───────────────────────────────────┘
                            │
@@ -236,41 +274,71 @@ Source: [Morph WarpGrep Benchmarks](https://www.morphllm.com/benchmarks/warp-gre
 
 ---
 
-## Query Guidelines
+## Common Patterns
 
-### Good Queries (Specific)
+### Reconnaissance-Then-Action
 
-```bash
-# ✅ Specific functionality
-"Find where user authentication is handled"
-"Find the main entry point"
-"Find where API keys are stored"
+```typescript
+import { MorphClient } from '@morphllm/morphsdk';
 
-# ✅ Conceptual questions
-"Find how memory blocks are initialized"
-"Find the settings management logic"
+const morph = new MorphClient({ apiKey: process.env.MORPH_API_KEY });
 
-# ✅ Code patterns
-"Find all React hooks usage"
-"Find database connection handling"
+// 1. Search for relevant code
+const result = await morph.warpGrep.execute({
+  query: 'Where is the payment processing logic?',
+  repoRoot: '.'
+});
+
+// 2. Use found contexts to inform next steps
+if (result.success) {
+  const relevantFiles = result.contexts.map(c => c.file);
+  console.log('Found relevant files:', relevantFiles);
+  // Now read/edit these specific files
+}
 ```
 
-### Bad Queries (Too Vague)
+### Combining WarpGrep + Fast Apply
 
-```bash
-# ❌ Too vague - model doesn't know what to search for
-"Find something"
-"Find code"
-"Search"
+```typescript
+import { MorphClient } from '@morphllm/morphsdk';
+
+const morph = new MorphClient({ apiKey: process.env.MORPH_API_KEY });
+
+// 1. Find the code to modify
+const search = await morph.warpGrep.execute({
+  query: 'Find the user validation function',
+  repoRoot: '.'
+});
+
+if (search.success && search.contexts.length > 0) {
+  const targetFile = search.contexts[0];
+  
+  // 2. Apply an edit
+  const result = await morph.fastApply.apply({
+    originalCode: targetFile.content,
+    editSnippet: '// Add your modified version here'
+  });
+  
+  console.log(result.mergedCode);
+}
 ```
 
 ---
 
+## MCP Integration
+
+For personal use with Claude Code, Cursor, or other MCP clients:
+
+```bash
+# Install MCP server
+claude mcp add morph --scope user -e MORPH_API_KEY=YOUR_API_KEY --npx -y @morphllm/morphmcp
+```
+
+This adds a `warpgrep_codebase_search` tool to your MCP client.
+
+---
+
 ## Troubleshooting
-
-### "Search did not complete" with Official SDK
-
-The official Morph SDK (`@morphllm/morphsdk`) may have version issues. Use the included `warpgrep-client.ts` script instead, which calls the API directly with the correct model name (`morph-warp-grep-v1`).
 
 ### ripgrep Not Found
 
@@ -293,11 +361,15 @@ curl -X POST https://api.morphllm.com/v1/chat/completions \
   -d '{"model":"morph-v3-fast","messages":[{"role":"user","content":"test"}]}'
 ```
 
-### Query Takes Too Long / Fails
+### SDK Version Issues
 
-- Make query more specific
-- Ensure repo isn't too large (>10K files may timeout)
-- Check API key has sufficient credits
+Ensure you're using the latest SDK:
+
+```bash
+bun add @morphllm/morphsdk@latest
+# or
+npm install @morphllm/morphsdk@latest
+```
 
 ---
 
@@ -305,6 +377,7 @@ curl -X POST https://api.morphllm.com/v1/chat/completions \
 
 - WarpGrep uses **1-4 API calls** per search (typically 2-3)
 - Fast Apply uses **1 API call** per edit
+- Pricing: $0.80 per 1M tokens (input and output)
 - Monitor usage via [Morph Dashboard](https://www.morphllm.com/dashboard)
 - Use regular grep/ripgrep for simple exact-match searches (free)
 
@@ -313,8 +386,8 @@ curl -X POST https://api.morphllm.com/v1/chat/completions \
 ## Resources
 
 - [Morph Documentation](https://docs.morphllm.com)
+- [WarpGrep Guide](https://docs.morphllm.com/sdk/components/warp-grep)
 - [WarpGrep Benchmarks](https://www.morphllm.com/benchmarks/warp-grep)
 - [Fast Apply Benchmarks](https://www.morphllm.com/benchmarks/fast-apply)
 - [Morph Dashboard](https://www.morphllm.com/dashboard)
 - [Morph Discord](https://discord.gg/AdXta4yxEK)
-- [Direct API Guide](https://docs.morphllm.com/sdk/components/warp-grep/direct)
