@@ -208,6 +208,42 @@ const applied = await morph.fastApply.apply({
 - Reserve WarpGrep for complex queries where it provides clear value
 - Monitor usage via the Morph dashboard
 
+## Troubleshooting
+
+### "Search did not complete" Error
+
+If the SDK returns this error, it may be using a deprecated model. Try:
+
+1. Update the SDK: `bun add @morphllm/morphsdk@latest`
+2. If still failing, use the direct API (see below)
+
+### Direct API Usage (Fallback)
+
+If the SDK has issues, call the API directly:
+
+```typescript
+// Fast Apply - Direct API
+const response = await fetch('https://api.morphllm.com/v1/chat/completions', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${process.env.MORPH_API_KEY}`
+  },
+  body: JSON.stringify({
+    model: 'morph-v3-fast',  // For Fast Apply
+    messages: [{
+      role: 'user',
+      content: `<instruction>Description of change</instruction>
+<code>${originalCode}</code>
+<update>${updatedCode}</update>`
+    }],
+    temperature: 0
+  })
+});
+```
+
+For WarpGrep direct API usage, see [Morph's Direct API Guide](https://docs.morphllm.com/sdk/components/warp-grep/direct).
+
 ## Resources
 
 - [Morph Documentation](https://docs.morphllm.com)
